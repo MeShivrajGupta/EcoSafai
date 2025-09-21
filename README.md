@@ -1,0 +1,2 @@
+# EcoSafai
+waste management project
