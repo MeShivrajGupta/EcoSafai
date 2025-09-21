@@ -1,0 +1,244 @@
+<!doctype html>
+
+<html lang="hi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>GreenSafai — Minimal Waste Management Frontend</title>
+    <meta name="description" content="Professional, modern and responsive 5-page frontend (HTML/CSS/JS) — sticky nav, hero, services, about, gallery, contact.">
+    <link rel="stylesheet" href="style.css">
+    <link href="script.js">
+
+</head>
+<body>
+    
+    <header>
+        <div class="container nav-wrap">
+            <div class="brand">
+                
+    <img src="ecosfaai-logo.jpg" alt="EcoSafai Logo" class="logo-img">
+
+                <div>
+                    <div style="font-size:0.95rem;">EcoSafai</div>
+                    <div class="muted-sm">Waste ko Resource banao</div>
+                </div>
+            </div>
+            <nav>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home" class="active">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <a href="login.html">
+                <button class="cta">Logout</button>
+                </a>
+                <button class="hamburger" id="burger">☰</button>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <section id="home" class="hero">
+            <div class="hero-card hover-effect">
+                <div class="eyebrow">City Waste Dashboard</div>
+                <h1>Be a Green Champion — Ghar se Shuru Hota Hai Badlav</h1>
+                <p class="lead">Segregate, compost, recycle. Small habits, big impact. Schedule pickups, report issues and learn with short training modules — sab ek jagah.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" onclick="location.hash='contact'">Schedule Pickup</button>
+                    <button class="btn btn-outline" onclick="location.hash='about'">Learn More</button>
+                </div>
+                <div style="margin-top:1.2rem;display:flex;gap:.9rem;flex-wrap:wrap">
+                    <div class="muted-sm">Daily waste insights • 54% processed</div>
+                    <div class="muted-sm">City leaderboard • Top volunteers</div>
+                </div>
+            </div><aside>
+                <div class="stats">
+                    <div class="stat hover-effect">
+                        <div class="ico"><a href="6bin.html">♻️</a></div>
+                         
+                        <div>
+                            <strong> <a href="6bin.html">6-Bin System </a> </strong>
+                            <div class="muted">Wet • Dry • Hazardous</div>
+                        </div>
+                    </div>
+                    <div class="stat hover-effect">
+                        <div class="ico"><a href="pickup.html">📦</a></div>
+                        <div>
+                            <strong><a href="pickup.html">Pickup Requests</strong>
+                            <div class="muted">Schedule & track in app</div>
+                        </div>
+                    </div>
+                    <div class="stat hover-effect">
+                        <div class="ico"><a href="indexrewords.html">🏆</a></div>
+                        <div>
+                            <strong><a href="indexrewords.html">Rewards</a></strong>
+                            <div class="muted">Points for segregation</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+                                
+        <section id="services">
+            <div class="section-head">
+                <h2 class="main">Services</h2>
+                <div class="muted-sm">Everything a citizen and waste worker needs in one place</div>
+            </div>
+            <div class="grid services-grid">
+                <div class="service hover-effect">
+                    <div style="font-size:1.35rem"><a href="videos.html">🏫</a></div>
+                    <h3><a href="videos.html">Training & Quizzes</a></h3>
+                    <p><a href="videos.html">Short videos, interactive quizzes and tips to learn segregation and composting at home.</a></p>
+                </div>
+                <div class="service hover-effect">
+                    <div style="font-size:1.35rem"><a href="schedule.html">🚚</a></div>
+                    <h3>Pickup Scheduling</h3>
+                    <p>Schedule collection, see assigned worker and live route map for transparency.</p>
+                </div>
+                <div class="service hover-effect">
+                    <div style="font-size:1.35rem"><a href="digital.html">🛒</a></div>
+                    <h3><a href="digital.html">Digital Shop</a></h3>
+                    <p>Buy compost kits, segregation bins and curated eco-products from the local market.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-head">
+                <h2 class="main">About</h2>
+                <div class="muted-sm">Our mission: Reduce landfill, close recycling loops and empower communities.</div>
+            </div>
+            <div class="about-layout">
+                <div>
+                    <div class="mission hover-effect">
+                        <h3 class="main">Our Story</h3>
+                        <p class="muted">EcoSafai started as a citizen initiative to make waste management easy and accountable. We partner with municipal teams, scrap dealers and volunteers to create a transparent system.</p>
+                        <h4 style="margin-top:1rem">Mission</h4>
+                        <p class="muted">Educate citizens, enable collectors and incentivize good practices. Har ghar, har gali — clean and green.</p>
+                    </div>
+
+                    <div style="display:flex;gap:1rem;margin-top:1rem">
+                        <div style="flex:1;background:var(--glass);padding:1rem;border-radius:12px" class="hover-effect">
+                            <strong>Volunteer</strong>
+                            <div class="muted">Join monthly Safai Abhiyaan and get points</div>
+                        </div>
+                        <div style="flex:1;background:var(--glass);padding:1rem;border-radius:12px" class="hover-effect">
+                            <strong>Committee</strong>
+                            <div class="muted">Local monitoring committee for compliance</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:linear-gradient(135deg,#072 10%, #065 90%);padding:1.25rem;border-radius:12px;min-height:200px;display:grid;place-items:center" class="hover-effect">
+                    <div style="text-align:center;color:#e7fff6">
+                        <h3 style="margin:0">Get Involved</h3>
+                        <p class="muted" style="margin-top:.6rem">Sign up to report, volunteer and earn rewards for sustainable actions.</p>
+                        <button class="btn btn-primary" style="margin-top:1rem" onclick="location.hash='contact'">Join Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+
+        <section id="contact"> 
+            <div class="section-head">
+                <h2 class="main">Contact us</h2>
+                <div class="muted-sm">Report waste, request pickup or ask about facilities — we respond within 48 hours.</div>
+            </div>
+            <div class="contact-wrap">
+                <form id="contactForm" novalidate class="hover-effect">
+                    <div class="form-row">
+                        <div>
+                            <label for="name">Name</label>
+                            <input id="name" name="name" required>
+                            <div class="field-error" id="err-name"></div>
+                        </div>
+                        <div>
+                            <label for="email">Email</label>
+                            <input id="email" name="email" required>
+                            <div class="field-error" id="err-email"></div>
+                        </div>
+                    </div>
+                    <div class="form-row-single" style="margin-top:.8rem">
+                        <label for="subject">Subject</label>
+                        <input id="subject" name="subject" required>
+                        <div class="field-error" id="err-subject"></div>
+                    </div>
+                    <div style="margin-top:.8rem">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <div class="field-error" id="err-message"></div>
+                    </div>
+
+                    <div style="margin-top:1rem;display:flex;gap:.8rem;align-items:center">
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="reset" class="btn btn-outline">Reset</button>
+                        <div id="formStatus" class="muted-sm" style="margin-left:1rem"></div>
+                    </div>
+                </form>
+
+                <aside style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)" class="hover-effect">
+                    <h4>Quick Contacts</h4>
+                    <div class="muted-sm">Municipal Helpdesk: 0123-456-789</div>
+                    <div style="margin-top:.6rem" class="muted-sm">Email: help@ecosafai.example</div>
+                    <div style="margin-top:1rem">
+                        <strong>Rules & Facilities</strong>
+                        <div class="muted-sm">View map of biogas, recycling, scrap shops in the admin panel.</div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div style="font-weight:700">EcoSafai</div>
+                <div class="muted-sm">Making waste management simple and fair.</div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:center">
+                <div class="muted-sm">© <span id="year"></span> EcoSafai</div>
+                <div style="display:flex;gap:.5rem">
+                    <a href="#">Twitter</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="authModal" style="display:none; position:fixed; inset:0; z-index:100; backdrop-filter:blur(3px); background:rgba(0,0,0,0.6); padding-top:10vh;">
+        <div class="container" style="max-width:400px; padding:1.5rem; background:var(--card); border-radius:12px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 10px 30px rgba(0,0,0,0.5);" class="hover-effect">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3 id="modalTitle">Login</h3>
+                <button onclick="closeModal()" style="background:none; border:none; color:var(--muted); font-size:1.5rem; cursor:pointer;">&times;</button>
+            </div>
+            <form id="authForm" style="margin-top:1rem;">
+                <div id="nameField" style="display:none; margin-bottom:.8rem;">
+                    <label for="modalName">Name</label>
+                    <input id="modalName" name="name" required>
+                    <div class="field-error" id="err-modal-name"></div>
+                </div>
+                <div style="margin-bottom:.8rem;">
+                    <label for="modalEmail">Email</label>
+                    <input id="modalEmail" name="email" type="email" required>
+                    <div class="field-error" id="err-modal-email"></div>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="modalPassword">Password</label>
+                    <input id="modalPassword" name="password" type="password" required>
+                    <div class="field-error" id="err-modal-password"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Submit</button>
+                <div id="authStatus" class="muted-sm" style="text-align:center; margin-top:1rem;"></div>
+                <div style="text-align:center; margin-top:.8rem;">
+                    <a href="#" id="toggleAuth" style="color:var(--accent); font-size:.9rem;">Don't have an account? Signup here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

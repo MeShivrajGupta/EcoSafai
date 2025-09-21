@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6-Bin Waste Segregation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wet-waste-color: #28a745;
+      --dry-waste-color: #007bff;
+      --hazardous-waste-color: #dc3545;
+      --e-waste-color: #ff9800;
+      --sanitary-waste-color: #9c27b0;
+      --biodegradable-color: #00bcd4;
+      --background-color: #0d121c;
+      --card-background: #1a202d;
+      --text-color: #e2e8f0;
+      --muted-text-color: #94a3b8;
+      --heading-color: #f8fafc;
+      --glow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* --- Home Icon --- */
+    .home-icon {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: var(--wet-waste-color);
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
+      z-index: 1000;
+    }
+    .home-icon:hover {
+      transform: scale(1.2) rotate(-5deg);
+      color: var(--dry-waste-color);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+      color: var(--heading-color);
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--wet-waste-color), var(--dry-waste-color), var(--hazardous-waste-color), var(--e-waste-color), var(--sanitary-waste-color), var(--biodegradable-color));
+      border-radius: 5px;
+      animation: slideIn 1.5s ease;
+    }
+
+    p { font-size: 1.1rem; max-width: 900px; margin: 0 auto 3rem; color: var(--muted-text-color); }
+
+    .bins-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      perspective: 1000px;
+    }
+
+    .waste-bin {
+      background-color: var(--card-background);
+      border-radius: 20px;
+      box-shadow: var(--glow);
+      padding: 2rem;
+      transition: transform 0.6s ease, box-shadow 0.5s ease;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      animation: fadeUp 1s ease forwards;
+      cursor: pointer;
+    }
+
+    .waste-bin:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    .waste-bin::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 10px;
+    }
+    .wet-waste::before { background-color: var(--wet-waste-color); }
+    .dry-waste::before { background-color: var(--dry-waste-color); }
+    .hazardous-waste::before { background-color: var(--hazardous-waste-color); }
+    .e-waste::before { background-color: var(--e-waste-color); }
+    .sanitary-waste::before { background-color: var(--sanitary-waste-color); }
+    .biodegradable::before { background-color: var(--biodegradable-color); }
+
+    .bin-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .waste-bin:hover .bin-icon { transform: rotate(15deg) scale(1.2); filter: drop-shadow(0 0 10px currentColor); }
+
+    .wet-waste .bin-icon { color: var(--wet-waste-color); }
+    .dry-waste .bin-icon { color: var(--dry-waste-color); }
+    .hazardous-waste .bin-icon { color: var(--hazardous-waste-color); }
+    .e-waste .bin-icon { color: var(--e-waste-color); }
+    .sanitary-waste .bin-icon { color: var(--sanitary-waste-color); }
+    .biodegradable .bin-icon { color: var(--biodegradable-color); }
+
+    .description { font-size: 1rem; color: var(--muted-text-color); margin-bottom: 1.5rem; transition: color 0.4s ease; }
+    .waste-bin:hover .description { color: var(--heading-color); }
+
+    .examples { text-align: left; margin-top: 1rem; }
+    .examples li {
+      background-color: #2d3748;
+      border-radius: 5px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--muted-text-color);
+      transition: background 0.4s ease, color 0.4s ease, transform 0.3s ease;
+    }
+    .examples li:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--heading-color);
+      transform: translateX(8px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes slideIn { from { width: 0; } to { width: 90%; } }
+  </style>
+</head>
+<body>
+  <!-- Home Icon -->
+  <a href="neerajweb.html"><i class="fas fa-home home-icon" title="Home"></i></a>
+
+
+  <div class="container">
+    <h1>6-Bin Waste Segregation</h1>
+    <p>Proper waste segregation helps recycling, reduces landfill, and promotes a cleaner, greener environment. Har ghar se shuru ho skta hai badlav.</p>
+
+    <div class="bins-container">
+      <!-- Wet Waste -->
+      <div class="waste-bin wet-waste">
+        <i class="fas fa-leaf bin-icon"></i>
+        <h2>Wet Waste</h2>
+        <p class="description">Biodegradable kitchen and garden waste.</p>
+        <ul class="examples">
+          <li>🍌 Fruit Peels</li>
+          <li>🥗 Vegetable Scraps</li>
+          <li>🍞 Leftover Food</li>
+          <li>🍂 Garden Leaves</li>
+        </ul>
+      </div>
+
+      <!-- Dry Waste -->
+      <div class="waste-bin dry-waste">
+        <i class="fas fa-recycle bin-icon"></i>
+        <h2>Dry Waste</h2>
+        <p class="description">Recyclable household items.</p>
+        <ul class="examples">
+          <li>📦 Cardboard</li>
+          <li>📰 Newspapers</li>
+          <li>🥤 Plastic Bottles</li>
+          <li>🍾 Glass Jars</li>
+        </ul>
+      </div>
+
+      <!-- Hazardous Waste -->
+      <div class="waste-bin hazardous-waste">
+        <i class="fas fa-biohazard bin-icon"></i>
+        <h2>Hazardous Waste</h2>
+        <p class="description">Materials dangerous for health & environment.</p>
+        <ul class="examples">
+          <li>🔋 Batteries</li>
+          <li>💡 CFL Bulbs</li>
+          <li>🧴 Chemicals</li>
+          <li>💊 Expired Medicines</li>
+        </ul>
+      </div>
+
+      <!-- E-Waste -->
+      <div class="waste-bin e-waste">
+        <i class="fas fa-plug bin-icon"></i>
+        <h2>E-Waste</h2>
+        <p class="description">Discarded electronic devices and parts.</p>
+        <ul class="examples">
+          <li>💻 Old Computers</li>
+          <li>📱 Broken Phones</li>
+          <li>🔌 Cables</li>
+          <li>🖨️ Printers</li>
+        </ul>
+      </div>
+
+      <!-- Sanitary Waste -->
+      <div class="waste-bin sanitary-waste">
+        <i class="fas fa-toilet-paper bin-icon"></i>
+        <h2>Sanitary Waste</h2>
+        <p class="description">Personal hygiene waste.</p>
+        <ul class="examples">
+          <li>🩸 Sanitary Pads</li>
+          <li>👶 Diapers</li>
+          <li>🧻 Tissue Papers</li>
+          <li>💉 Medical Cotton</li>
+        </ul>
+      </div>
+
+      <!-- Biodegradable Waste -->
+      <div class="waste-bin biodegradable">
+        <i class="fas fa-seedling bin-icon"></i>
+        <h2>Biodegradable Waste</h2>
+        <p class="description">Natural waste that decomposes quickly.</p>
+        <ul class="examples">
+          <li>🌿 Garden Grass</li>
+          <li>🌽 Corn Husks</li>
+          <li>☕ Coffee Grounds</li>
+          <li>🍂 Dry Leaves</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

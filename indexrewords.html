@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenSafai: Community & Rewards</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  /* --- Root Variables --- */
+  :root {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --accent-green: #2ecc71;
+    --accent-blue: #00aaff;
+    --border-color: #333333;
+    --card-radius: 12px;
+    --gap: 30px;
+  }
+
+  body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  /* --- Home Icon --- */
+  .home-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    color: var(--accent-green);
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    z-index: 1000;
+  }
+
+  .home-icon:hover {
+    transform: scale(1.2);
+    color: var(--accent-blue);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem;
+  }
+
+  h1, h2, h3 { font-weight: 700; }
+
+  /* --- Section Styles --- */
+  .section-container {
+    padding: 60px 0;
+  }
+
+  .section-container h1, .section-container h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: var(--accent-green);
+  }
+
+  .section-container p.subtitle, .section-container p {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  /* --- Grid Layouts --- */
+  .community-grid {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: 1fr;
+  }
+
+  .rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--gap);
+  }
+
+  @media (min-width: 768px) {
+    .community-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* --- Card Styles --- */
+  .card, .reward-card {
+    background-color: var(--card-bg);
+    border-radius: var(--card-radius);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .card:hover, .reward-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(46,204,113,0.3);
+  }
+
+  .reward-card::after {
+    content:"";
+    position:absolute;
+    top:-50%; left:-50%;
+    width:200%; height:200%;
+    background: radial-gradient(circle, rgba(46,204,113,0.2), transparent 60%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    z-index:0;
+  }
+
+  .reward-card:hover::after { transform: scale(1); }
+
+  .reward-card .points { font-size: 2rem; font-weight: bold; color: var(--accent-green); margin-bottom: 0.5rem; }
+  .reward-card .desc { font-size: 0.95rem; color: var(--text-secondary); }
+
+  /* --- Leaderboard & Stats --- */
+  .leaderboard-card h3, .stats-card h3 {
+    font-size: 1.8rem; color: var(--accent-blue); margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color); padding-bottom: 10px;
+  }
+
+  #leaderboard-list { list-style: none; padding: 0; margin: 0; }
+  #leaderboard-list li { display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid var(--border-color); font-size:1.1rem; font-weight:500; transition: all 0.3s ease; }
+  #leaderboard-list li:hover { background: linear-gradient(90deg, rgba(46,204,113,0.15), rgba(0,170,255,0.15)); transform: translateX(5px); }
+  #leaderboard-list li:last-child { border-bottom:none; }
+
+  .rank-name { color: var(--text-primary); flex-grow:1; }
+  .rank-points { color: var(--accent-blue); font-weight:700; }
+
+  .stats-card { display:flex; flex-direction:column; }
+  .stat-item { display:flex; align-items:center; padding:15px 0; border-bottom:1px solid var(--border-color); transition: transform 0.3s ease, color 0.3s ease; }
+  .stat-item:last-child { border-bottom:none; }
+  .stat-item:hover { transform: translateX(5px) scale(1.02); }
+  .stat-item i { font-size:1.5rem; color: var(--accent-green); margin-right:15px; transition: transform 0.3s ease; }
+  .stat-item:hover i { transform: scale(1.1); }
+  .stat-label { font-size:1.1rem; color: var(--text-secondary); font-weight:500; flex-grow:1; }
+  .stat-value { font-size:1.1rem; color: var(--accent-blue); font-weight:700; }
+
+  /* --- Buttons --- */
+  .btn { display:inline-block; padding:12px 25px; font-size:1rem; font-weight:600; text-align:center; border-radius:8px; cursor:pointer; text-decoration:none; transition:all 0.3s ease; margin-top:25px; align-self:flex-start; position:relative; z-index:1; overflow:hidden; }
+  .secondary-btn { background-color: var(--accent-green); color: var(--bg); border:none; }
+  .secondary-btn:hover { transform: translateY(-3px); }
+  .secondary-btn::before {
+    content:"";
+    position:absolute; left:50%; top:50%; width:300%; height:300%;
+    background: rgba(255,255,255,0.1); transform: translate(-50%, -50%) scale(0); border-radius:50%; transition: transform 0.5s ease; z-index:0;
+  }
+  .secondary-btn:hover::before { transform: translate(-50%, -50%) scale(1); }
+
+  /* --- Animations --- */
+  @keyframes fadeInUp { 0% { opacity:0; transform:translateY(30px);} 100% {opacity:1; transform:translateY(0);} }
+  .rewards-grid .reward-card:nth-child(1) { animation-delay:0.1s; }
+  .rewards-grid .reward-card:nth-child(2) { animation-delay:0.3s; }
+  .rewards-grid .reward-card:nth-child(3) { animation-delay:0.5s; }
+  .rewards-grid .reward-card:nth-child(4) { animation-delay:0.7s; }
+  .community-grid .card:nth-child(1) { animation-delay:0.2s; }
+  .community-grid .card:nth-child(2) { animation-delay:0.4s; }
+
+  /* --- Background --- */
+  body::before {
+    content:"";
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background: radial-gradient(circle at 10% 20%, rgba(46,204,113,0.05), transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(0,170,255,0.05), transparent 25%);
+    z-index:-1;
+    animation: bgMove 30s linear infinite;
+  }
+  @keyframes bgMove { 0% { background-position:0% 0%, 100% 100%; } 50% { background-position:100% 0%, 0% 100%; } 100% { background-position:0% 0%, 100% 100%; } }
+</style>
+</head>
+<body>
+
+  <!-- Home Icon -->
+  <a href="neerajweb.html"><i class="fas fa-home home-icon" title="Home"></i></a>
+
+  <div class="container">
+    <!-- Rewards Section -->
+    <section id="rewards" class="section-container">
+      <h1>🎉 Rewards & Points</h1>
+      <p class="subtitle">Earn points for every eco-friendly action you take!</p>
+      <div class="rewards-grid">
+        <div class="reward-card">
+          <div class="points">+50</div>
+          <h3>Segregate Waste</h3>
+          <p class="desc">Earn points every time you correctly separate Wet, Dry & Hazardous waste.</p>
+        </div>
+        <div class="reward-card">
+          <div class="points">+30</div>
+          <h3>Schedule Pickup</h3>
+          <p class="desc">Book and complete a waste pickup to add extra points to your profile.</p>
+        </div>
+        <div class="reward-card">
+          <div class="points">+20</div>
+          <h3>Training & Quizzes</h3>
+          <p class="desc">Complete learning modules or quizzes to grow your knowledge and points.</p>
+        </div>
+        <div class="reward-card">
+          <div class="points">+10</div>
+          <h3>Report Issues</h3>
+          <p class="desc">Help keep your city clean by reporting illegal dumping or issues.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section-container">
+      <h2>Community Building: Penalty & Rewards</h2>
+      <p>Earn points and rewards for your contributions. See how you rank on the leaderboard!</p>
+      <div class="community-grid">
+        <div class="leaderboard-card card">
+          <h3>Leaderboard</h3>
+          <ol id="leaderboard-list">
+            <li><span class="rank-name">1. Alex R.</span><span class="rank-points">950 pts</span></li>
+            <li><span class="rank-name">2. Samantha J.</span><span class="rank-points">820 pts</span></li>
+            <li><span class="rank-name">3. Michael B.</span><span class="rank-points">780 pts</span></li>
+          </ol>
+        </div>
+        <div class="stats-card card">
+          <h3>My Stats</h3>
+          <div class="stat-item"><i class="fas fa-trophy"></i><span class="stat-label">Points:</span><span class="stat-value" id="user-points">650</span></div>
+          <div class="stat-item"><i class="fas fa-tasks"></i><span class="stat-label">Reports Submitted:</span><span class="stat-value" id="user-reports">12</span></div>
+          <div class="stat-item"><i class="fas fa-hand-holding-usd"></i><span class="stat-label">Rewards Earned:</span><span class="stat-value" id="user-rewards">3</span></div>
+          <button class="btn secondary-btn add-points-btn">Add Dummy Points</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>

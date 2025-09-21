@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pickup Request</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#1a2233; --accent:#3ee68c; --muted:#9aa6b2; --text:#fff;
+      --radius:14px; --gap:1.2rem;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(180deg,#071025 0%,#071827 60%);
+      color:var(--text);
+      min-height:100vh;
+      padding:2rem;
+    }
+    header{
+      text-align:center;
+      position:relative;
+      margin-bottom:2.5rem;
+      animation:fadeDown 1s ease;
+    }
+    @keyframes fadeDown{
+      from{opacity:0;transform:translateY(-20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    header h1{color:var(--accent);font-size:2.2rem;margin-bottom:.5rem;}
+    header p{color:var(--muted);font-size:1.05rem;}
+
+    /* Icons */
+    .icon-left, .icon-right{
+      position:absolute;
+      font-size:1.6rem;
+      color:var(--accent);
+      background:rgba(255,255,255,0.05);
+      padding:10px;
+      border-radius:50%;
+      transition:.3s;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .icon-left{top:15px; left:15px;}
+    .icon-right{top:15px; right:15px;}
+    .icon-left:hover, .icon-right:hover{
+      background:var(--accent);
+      color:#022;
+      transform:scale(1.1);
+    }
+
+    form{
+      max-width:500px;margin:0 auto;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:var(--radius);
+      padding:2rem;
+      animation:fadeIn .8s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:scale(.95);}
+      to{opacity:1;transform:scale(1);}
+    }
+    label{display:block;margin-bottom:.5rem;font-weight:600;}
+    input,select{
+      width:100%;padding:.8rem;
+      margin-bottom:1.2rem;
+      border:none;border-radius:var(--radius);
+      background:rgba(255,255,255,0.08);color:var(--text);
+      font-size:1rem;
+      outline:none;
+      transition:.3s;
+    }
+    input:focus,select:focus{background:rgba(255,255,255,0.15);}
+    button{
+      width:100%;padding:.9rem;
+      background:var(--accent);border:none;border-radius:var(--radius);
+      font-size:1.1rem;font-weight:600;
+      cursor:pointer;transition:.3s;
+    }
+    button:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(0,0,0,.4);}
+    .confirmation{
+      text-align:center;margin-top:1.2rem;font-weight:600;color:var(--accent);display:none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="neerajweb.html" class="icon-left" title="Go to Home"><i class="fas fa-home"></i></a>
+    <a href="schedule.html" class="icon-right" title="View Schedule"><i class="fas fa-calendar"></i></a>
+    <h1>♻️ Request a Pickup</h1>
+    <p>Fill out the form below to schedule your waste pickup</p>
+  </header>
+
+  <form id="pickupForm">
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="fullName" required>
+
+    <label for="address">Address</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="contactNumber">Contact Number</label>
+    <input type="text" id="contactNumber" name="contactNumber" required>
+
+    <label for="wasteType">Waste Type</label>
+    <select id="wasteType" name="wasteType" required>
+      <option value="Plastic">Plastic</option>
+      <option value="Organic">Organic</option>
+      <option value="E-Waste">E-Waste</option>
+      <option value="Metal">Metal</option>
+      <option value="Paper">Paper</option>
+    </select>
+
+    <label for="pickupDate">Pickup Date</label>
+    <input type="date" id="pickupDate" name="pickupDate" required>
+
+    <label for="pickupTime">Pickup Time</label>
+    <input type="time" id="pickupTime" name="pickupTime" required>
+
+    <button type="submit">Submit Request</button>
+    <div class="confirmation" id="confirmationMessage"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("pickupForm");
+    const confirmationMessage = document.getElementById("confirmationMessage");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const formData = {
+        fullName: form.fullName.value.trim(),
+        address: form.address.value.trim(),
+        contactNumber: form.contactNumber.value.trim(),
+        wasteType: form.wasteType.value,
+        pickupDate: form.pickupDate.value,
+        pickupTime: form.pickupTime.value
+      };
+
+      // Save in LocalStorage
+      let pickups = JSON.parse(localStorage.getItem("pickups")) || [];
+      pickups.push(formData);
+      localStorage.setItem("pickups", JSON.stringify(pickups));
+
+      confirmationMessage.textContent = 
+        `✅ Pickup scheduled for ${formData.pickupDate} at ${formData.pickupTime}`;
+      confirmationMessage.style.display = "block";
+
+      setTimeout(() => {
+        form.reset();
+        confirmationMessage.style.display = "none";
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
